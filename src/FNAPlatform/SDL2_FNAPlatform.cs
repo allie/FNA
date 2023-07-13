@@ -481,6 +481,15 @@ namespace Microsoft.Xna.Framework
 			{
 				Environment.SetEnvironmentVariable("FNA_GRAPHICS_ENABLE_HIGHDPI", "0");
 			}
+			else
+			{
+				// Double check that the drawable size is appropriate
+				int drawableWidth, drawableHeight;
+				SDL.SDL_GL_GetDrawableSize(window, out drawableWidth, out drawableHeight);
+				if (drawableWidth == GraphicsDeviceManager.DefaultBackBufferWidth && drawableHeight == GraphicsDeviceManager.DefaultBackBufferHeight) {
+					Environment.SetEnvironmentVariable("FNA_GRAPHICS_ENABLE_HIGHDPI", "0");
+				}
+			}
 
 			return new FNAWindow(
 				window,
